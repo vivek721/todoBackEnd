@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+<!-- Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+  <title>Events</title>
+  <!-- CSS  -->
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+
+  <style>
+    .icon-block {
+      padding: 0 15px;
+    }
+
+    .icon-block .material-icons {
+      font-size: inherit;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="section no-pad-bot" style="margin-bottom: 0px" id="index-banner">
+    <div class="container" style="width: 80%">
+      <p style="font-size: 2em; font-weight: 540; text-align: center">Events documentation</p>
+      <div class="row">
+
+        <div class="col  hide-on-small-only m4 l3">
+          <ul class="section table-of-contents">
+            <li><a href="#listen" style="color: #03a9f4; font-size: 1.2em; font-weight: bold">Listen</a></li>
+            <li><a href="#set-user">set-user</a></li>
+            <li><a href="#eventOccured">event-occured</a></li>
+            <li><a href="#alertUserForEvent">alert-user-for-upcomming-event</a></li>
+            <li><a href="#alertUserForEvent">alert-user-for-upcomming-meeting</a></li>
+            <li><a href="#sendAlertMail">sendAlertMail</a></li>
+            <li><a href="#disconnect">disconnect</a></li>
+
+            <li><a href="#emit" style="color: #03a9f4; font-size: 1.2em; font-weight: bold">Emit</a></li>
+            <li><a href="#verifyUser">verifyUser</a></li>
+            <li><a href="#auth-error">auth-error</a></li>
+            <li><a href="#sendAlertMail">sendAlertMail</a></li>
+            <li><a href="#userId">createdForId</a></li>
+            <li><a href="#NofityUserNewEvent">alert-user-for-upcomming-event</a></li>
+          </ul>
+        </div>
+
+        <div class="col s12 m8 l9">
+
+          <div id="listen" class="section scrollspy"></div>
+          <h4>Events to listen</h4>
+          <div id="set-user" class="section scrollspy">
+            <h5>set-user</h5>
+            This event <span style="font-weight: 600">("set-user")</span> has to be listened on the useris verifyied and
+            to set him online.<br />
+          </div>
+          <div id="eventOccured" class="section scrollspy">
+            <h5>event-occured</h5>
+            This event <span style="font-weight: 600">("event-occured")</span> has to be listen on user's end to get
+            updated events.<br />
+          </div>
+          <div id="alertUserForEvent" class="section scrollspy">
+            <h5>alert-user-for-upcomming-even</h5>
+            This event <span style="font-weight: 600">("alert-user-for-upcomming-even")</span>has to listen on backend
+            to send email to user for recently created,updated or deleted events.
+          </div>
+          <div id="alertUserForMeeting" class="section scrollspy">
+            <h5>alert-user-for-upcomming-meeting</h5>
+            This event <span style="font-weight: 600">("alert-user-for-upcomming-meeting")</span> has to be listened
+            on user side to notify user in real time if an event is recently created updated or deleted.
+          </div>
+          <div id="sendAlertMail" class="section scrollspy">
+            <h5>sendAlertMail</h5>
+            This event <span style="font-weight: 600">("sendAlertMail")</span> has to be listened on server side to send
+            a mail to user to notify about event change.
+          </div>
+          <div id="disconnect" class="section scrollspy">
+            <h5>disconnect</h5>
+            This event <span style="font-weight: 600">("disconnect")</span> has to be listened on client side whenever
+            user goes offline.
+          </div>
+
+          <div id="emit" class="section scrollspy"></div>
+          <h4>Events to emit</h4>
+
+          <div id="verifyUser" class="section scrollspy">
+            <h5>verifyUser</h5>
+            This event <span style="font-weight: 600">("verifyUser")</span> has to be emitted to authenticate
+            user.
+          </div>
+
+          <div id="auth-error" class="section scrollspy">
+            <h5>auth-error</h5>
+            This event <span style="font-weight: 600">("auth-error")</span> has to be emitted
+            when user is failed to verify.
+          </div>
+          <div id="sendAlertMail" class="section scrollspy">
+            <h5>sendAlertMail</h5>
+            This event <span style="font-weight: 600">("sendAlertMail")</span> has to be emitted when a mail has to sent
+            to user to notify him on event change.
+            <br>
+            <div id="addtask" class="section scrollspy">
+              <h5>add-task event</h5>
+              This event <span style="font-weight: 600">("addtask")</span> has to be emitted when user creates task.
+              <br />
+            </div>
+            <div id="userId" class="section scrollspy">
+              <h5>userId event</h5>
+              This event <span style="font-weight: 600">("userId")</span> has to be emitted when a particular user has
+              to be notified.
+              <br>
+            </div>
+            <div id="NofityUserNewEvent" class="section scrollspy">
+              <h5>alert-user-for-upcomming-event</h5>
+              This event <span style="font-weight: 600">("alert-user-for-upcomming-event")</span> has to be emitted an
+              event change occurs
+              <br>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <br /><br /><br /><br />
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.0.min.js"
+      integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $('.scrollspy').scrollSpy();
+      });
+    </script>
+    <script>
+      (function ($) {
+        $(function () {
+          $('.button-collapse').sideNav();
+        }); // end of document ready
+      })(jQuery); // end of jQuery name space
+    </script>
+</body>
+
+
+
+</html>
