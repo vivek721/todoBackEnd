@@ -30,6 +30,10 @@ let todoSchema = new Schema({
     type: Date,
     default: Date.now
   },
+  canDelete: {
+    type: Boolean,
+    default: true
+  }
 })
 
 

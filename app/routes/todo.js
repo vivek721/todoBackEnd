@@ -20,6 +20,8 @@ module.exports.setRouter = (app) => {
 
   app.put(baseUrl + '/:todoId/edit', auth.isAuthorized, todoController.editTodo);
 
+  app.get(baseUrl + '/:todoId/undoTodo', todoController.undoTodo)
+
 
 
 }

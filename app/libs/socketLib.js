@@ -2,24 +2,10 @@
  * modules dependencies.
  */
 const socketio = require("socket.io");
-const mongoose = require("mongoose");
-const shortid = require("shortid");
-const logger = require("./loggerLib.js");
 const events = require("events");
 const eventEmitter = new events.EventEmitter();
-const moment = require("moment");
-
-const schedule = require('node-schedule');
-
-const nodemailer = require("nodemailer");
-
-const EventModel = mongoose.model("Event");
 
 const tokenLib = require("./tokenLib.js");
-const check = require("./checkLib.js");
-const response = require("./responseLib");
-
-let allEventDetails = [];
 
 let setServer = server => {
   let allOnlineUsers = [];
@@ -58,25 +44,20 @@ let setServer = server => {
           }
           allOnlineUsers.push(userObj)
           console.log(allOnlineUsers);
+
+          // setting room name
+          socket.room = 'todoRoom'
+          // joining chat-group room.
+          socket.join(socket.room)
+          socket.to(socket.room).broadcast.emit('online-user-list', allOnlineUsers);
+
         }
       });
     }); // end of listening set-user event
 
     socket.on("event-occured", (data) => {
-      console.log("****eventOccured for ***************" + data.actionPerformed);
-      setTimeout(function () {
-        if (data.eventStart !== null) {
-          eventEmitter.emit('sendAlertMail', data);
-        }
-
-      }, 2000)
-      myIo.emit(data.createdForId, data);
-      let scheduleTime = moment(data.eventStart).subtract(1, 'm').toDate();
-      var j = schedule.scheduleJob(scheduleTime, function () {
-        console.log("sending remainder mail");
-        eventEmitter.emit('alert-user-for-upcomming-event', data);
-        myIo.emit('alert-user-for-upcomming-meeting', data);
-      });
+      console.log("****eventOccured for ***************" + data);
+      myIo.emit(data.requestSentTo, data);
 
     }); // end of event occured 
 
@@ -97,66 +78,6 @@ let setServer = server => {
   });
 };
 // end of setServer block
-
-eventEmitter.on('alert-user-for-upcomming-event', (data) => {
-  var transporter = nodemailer.createTransport({
-    service: "gmail",
-    /* temporary email */
-    auth: {
-      user: "vivekedwisor@gmail.com",
-      pass: "Edwisorvivek1"
-    }
-  });
-
-  var mailOptions = {
-    from: "vivekedwisor@gmail.com",
-    to: data.creatorForEmail,
-    subject: `You Have a meeting in 1 minute`,
-    text: `Dear ${data.createdForName},
-You have an meeting with title "${data.eventTitle}" occuring in 1 minute
-Cheers!`
-  };
-
-  transporter.sendMail(mailOptions, function (error, info) {
-    if (error) {
-      console.log(err);
-      console.log("an error occured while sending alert email")
-    } else {
-      console.log(info);
-    }
-  });
-})
-
-
-eventEmitter.on('sendAlertMail', (data) => {
-  var transporter = nodemailer.createTransport({
-    service: "gmail",
-    /* temporary email */
-    auth: {
-      user: "vivekedwisor@gmail.com",
-      pass: "Edwisorvivek1"
-    }
-  });
-
-  var mailOptions = {
-    from: "vivekedwisor@gmail.com",
-    to: data.creatorForEmail,
-    subject: `an event has been ${data.actionPerformed}`,
-    text: `Dear ${data.createdForName},
-An event with title "${data.eventTitle}" is ${data.actionPerformed} by ${data.creatorName}
-Cheers!`
-  };
-
-  transporter.sendMail(mailOptions, function (error, info) {
-    if (error) {
-      console.log(err);
-      console.log("an error occured while sending alert email")
-    } else {
-      console.log(info);
-    }
-  });
-});
-
 
 
 
