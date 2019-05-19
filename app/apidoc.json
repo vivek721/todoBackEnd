@@ -1,7 +1,6 @@
 {
-  "name": "MeetingPlanner Application",
+  "name": "Todo Application",
   "version": "0.0.1",
-  "description": "Documentation for the MeetingPlanner app",
-  "title": "MeetingPlanner APIs",
-  "url": "http://api.edvivek.xyz"
+  "description": "Documentation for the Todo app",
+  "title": "Todo APIs"
 }

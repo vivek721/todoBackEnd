@@ -2,6 +2,7 @@ const express = require("express");
 const appConfig = require("./../../config/appConfig");
 const userController = require("../controller/userController");
 const fs = require("fs");
+const path = require("path");
 const auth = require("../middlewares/auth");
 
 let countryName;
@@ -11,7 +12,7 @@ module.exports.setRouter = app => {
   let baseUrl = `${appConfig.apiVersion}/users`;
   /*  Send country Name */
   app.get(`${baseUrl}/countryName`, (req, res) => {
-    let data = fs.readFileSync("../Meeting-Backend/config/names.json");
+    let data = fs.readFileSync(path.resolve(__dirname, "../../config/names.json"));
     countryName = JSON.parse(data);
     res.send(countryName);
   });
@@ -38,7 +39,7 @@ module.exports.setRouter = app => {
 
   /*  Send country Name */
   app.get(`${baseUrl}/countryCode`, (req, res) => {
-    let data = fs.readFileSync("../Meeting-Backend/config/phone.json");
+    let data = fs.readFileSync(path.resolve(__dirname, "../../config/phone.json"));
     countryCode = JSON.parse(data);
     res.send(countryCode);
   });
@@ -245,12 +246,178 @@ module.exports.setRouter = app => {
 	 */
 
   app.get(`${baseUrl}/:userId/getAll`, auth.isAuthorized, userController.getAllUsers);
+  /**
+  	 * @api {get} /api/v1/users/:userId/getAll getAllUsers function
+  	 * @apiVersion 0.0.1
+  	 * @apiGroup Users
+    * @apiParam {String} authToken The token for removing authToken passed as body parameter
+    * @apiParam {String} userId is passed as passed as param parameter
+  	 *
+  	 *  @apiSuccessExample {json} Success-Response:
+  	 *  {
+      "error": false,
+      "message": "Logged Out Successfully",
+      "status": 200,
+      "data": null
+  }
+    } 
+  }
+  }
+  		}
+  	}
+  	  @apiErrorExample {json} Error-Response:
+  	 *
+  	 *{
+      "error": true,
+      "message": "Invalid Or Expired AuthorizationKey",
+      "status": 404,
+      "data": null
+  }
+  	 */
+
 
   app.get(`${baseUrl}/:userId/getUserById`, auth.isAuthorized, userController.getSingleUser);
+  /**
+  	 * @api {get} /api/v1/users/:userId/getUserById getSingleUser function
+  	 * @apiVersion 0.0.1
+  	 * @apiGroup Users
+    * @apiParam {String} authToken The token for removing authToken passed as body parameter
+    * @apiParam {String} userId is passed as passed as param parameter
+  	 *
+  	 *  @apiSuccessExample {json} Success-Response:
+  	 *  {
+      "error": false,
+      "message": "Successfull in retrieving data",
+      "status": 200,
+      "data": {
+        data...
+      }
+  }
+    } 
+  }
+  }
+  		}
+  	}
+  	  @apiErrorExample {json} Error-Response:
+  	 *
+  	 *{
+      "error": true,
+      "message": "Invalid Or Expired AuthorizationKey",
+      "status": 404,
+      "data": null
+  }
+  	 */
 
   app.put(`${baseUrl}/sendFriendRequest`, auth.isAuthorized, userController.sendFriendRequest);
+
+  /**
+	 * @api {put} /api/v1/users/sendFriendRequest logout sendFriendRequest
+	 * @apiVersion 0.0.1
+	 * @apiGroup Users
+   * @apiParam {String} authToken The token for removing authToken passed as body parameter
+   * @apiParam {String} senderName is passed as body parameter
+   * @apiParam {String} senderId is passed as body parameter
+   * @apiParam {String} recieverName is passed as body parameter
+   * @apiParam {String} recieverId is passed as body parameter
+   * 
+   * 
+   * 
+	 *  @apiSuccessExample {json} Success-Response:
+	 *  {
+    "error": false,
+    "message": "friend Request Sent successfully",
+    "status": 200,
+    "data": null
+}
+  } 
+}
+}
+		}
+	}
+	  @apiErrorExample {json} Error-Response:
+	 *
+	 *{
+    "error": true,
+    "message": "Invalid Or Expired AuthorizationKey",
+    "status": 404,
+    "data": null
+}
+	 */
+
   app.put(`${baseUrl}/acceptFriendRequest`, auth.isAuthorized, userController.acceptFriendRequest);
-  app.put(`${baseUrl}/rejectFriendRequest`, userController.rejectFriendRequest);
+
+
+  /**
+	 * @api {post} /api/v1/users/acceptFriendRequest logout acceptFriendRequest
+	 * @apiVersion 0.0.1
+	 * @apiGroup Users
+   * @apiParam {String} authToken The token for removing authToken passed as body parameter
+   * @apiParam {String} senderName is passed as body parameter
+   * @apiParam {String} senderId is passed as body parameter
+   * @apiParam {String} recieverName is passed as body parameter
+   * @apiParam {String} recieverId is passed as body parameter
+   * 
+   * 
+   * 
+	 *  @apiSuccessExample {json} Success-Response:
+	 *  {
+    "error": false,
+    "message": "friend Request accepted successfully",
+    "status": 200,
+    "data": null
+}
+  } 
+}
+}
+		}
+  }
+  
+	  @apiErrorExample {json} Error-Response:
+	 *
+	 *{
+    "error": true,
+    "message": "Invalid Or Expired AuthorizationKey",
+    "status": 404,
+    "data": null
+}
+	 */
+
+  app.put(`${baseUrl}/rejectFriendRequest`, auth.isAuthorized, userController.rejectFriendRequest);
+
+  /**
+	 * @api {post} /api/v1/users/rejectFriendRequest logout rejectFriendRequest
+	 * @apiVersion 0.0.1
+	 * @apiGroup Users
+   * @apiParam {String} authToken The token for removing authToken passed as body parameter
+   * @apiParam {String} senderName is passed as body parameter
+   * @apiParam {String} senderId is passed as body parameter
+   * @apiParam {String} recieverName is passed as body parameter
+   * @apiParam {String} recieverId is passed as body parameter
+   * 
+   * 
+   * 
+	 *  @apiSuccessExample {json} Success-Response:
+	 *  {
+    "error": false,
+    "message": "friend Request rejected successfully",
+    "status": 200,
+    "data": null
+}
+  } 
+}
+}
+		}
+  }
+  
+	  @apiErrorExample {json} Error-Response:
+	 *
+	 *{
+    "error": true,
+    "message": "Invalid Or Expired AuthorizationKey",
+    "status": 404,
+    "data": null
+}
+	 */
 
 
 

@@ -1,10 +1,12 @@
 let appConfig = {};
 
-appConfig.port = 3000;
+appConfig.port = process.env.PORT || 3000;
 appConfig.allowedCorsOrigin = "*";
 appConfig.env = "dev";
 appConfig.db = {
-  uri: "mongodb://127.0.0.1:27017/TodoDB"
+  /* uri: "mongodb+srv://vivek721:Gnxo4cAXhNC1DAom@todoapp-rzyr9.mongodb.net/test?retryWrites=true" */
+  uri: "mongodb://vivek721:Gnxo4cAXhNC1DAom@todoapp-shard-00-00-rzyr9.mongodb.net:27017,todoapp-shard-00-01-rzyr9.mongodb.net:27017,todoapp-shard-00-02-rzyr9.mongodb.net:27017/test?ssl=true&replicaSet=todoapp-shard-0&authSource=admin&retryWrites=true"
+
 };
 appConfig.apiVersion = "/api/v1";
 
